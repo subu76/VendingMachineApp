@@ -1,0 +1,49 @@
+<div>
+  <h6>Please enter the details below and click on purchase</h6>
+  <p></p>
+ 
+  <div class="alert alert-warning" *ngIf='errorExist'>
+
+    {{errorMessage}}
+  </div>
+  <div class="alert alert-success" *ngIf='!errorExist'>
+    {{successMessage}}
+  </div>
+  <p></p>
+  <form [formGroup]="myform" (ngSubmit)="!myform.invalid && acceptUserInput()">
+    
+    <div class="form-group">
+      <label for="userRequestedQty" >Quantity:</label>
+      <input type="number" class="form-control" maxlength="5"  formControlName="userRequestedQty"
+        [(ngModel)]="userRequestedQty" aria-describedby="qtyHelp" placeholder="Enter Quantity" />
+      <small id="qtyHelp" class="form-text text-muted text-info">Please enter the total no of cans to buy</small>
+      <p class="text-danger font-weight-normal  mt-2 "
+        *ngIf="!myform.get('userRequestedQty').valid && myform.get('userRequestedQty').touched">A valid quantity is required.
+      </p>
+    </div>
+    <div class="form-group">
+      <label for="userProvidedCash" >Cash:</label>
+      <input type="number" class="form-control" maxlength="10" formControlName="userProvidedCash"
+        aria-describedby="cashHelp" [(ngModel)]="userProvidedCash" placeholder="Enter Cash" required>
+      <small id="cashHelp" class="form-text text-muted text-info">Please enter the Cash in $</small>
+      <p class="text-danger font-weight-normal  mt-2 "
+        *ngIf="!myform.get('userProvidedCash').valid && myform.get('userProvidedCash').touched">A Cash Amount is
+        required.</p>
+    </div>
+
+    <p></p>
+    <table>
+      <tr>
+        <td>
+          <button type="submit" class="btn btn-success">Purchase</button>         
+        </td>
+      </tr>
+    </table>
+
+    <div class="container-fluid">
+      <span>
+        <h6 class="text-dark">Total Cost : $ {{totalCash | number:'1.2-2'}} </h6>
+      </span><br>
+    </div>
+  </form>
+</div>

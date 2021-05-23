@@ -1,0 +1,35 @@
+<div>
+    <div class="alert alert-warning" *ngIf='errorExist'>
+        {{errorMessage}}
+    </div>
+    <div class="alert alert-success" *ngIf='!errorExist'>
+        {{successMessage}}
+    </div>
+    <p></p>
+
+    <form>
+        <div class="form-group" [formGroup]="myform" (ngSubmit)="reSupplyCans()">
+            <label for="resuppliedQty">Resupply Quantity</label>
+            <input type="number" class="form-control" formControlName="resuppliedQty" [(ngModel)]="resuppliedQty"
+                placeholder="Enter Resupply Quantity" aria-describedby="resupplyHelp" required>
+            <small id="resupplyHelp" class="form-text text-muted">Please enter the no of cans to be resupplied.</small>
+            <p class="text-danger font-weight-normal  mt-2 "
+                *ngIf="!myform.get('resuppliedQty').valid && myform.get('resuppliedQty').touched">A quantity is
+                required.</p>
+        </div>
+        <p>
+
+        <table>
+            <tr>
+                <td>
+                    <button (click)="reSupplyCans()" class="btn btn-primary">Resupply</button>
+                </td>
+                <td>
+                    <button (click)="ResetStock()" class="btn btn-danger">Reset Stock</button>
+
+                </td>
+
+            </tr>
+        </table>
+    </form>
+</div>

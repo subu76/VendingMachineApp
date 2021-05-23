@@ -1,0 +1,7 @@
+<app-purchase (newStockValue)='updateStock($event)'></app-purchase>
+
+<div class="container-fluid">
+    <b>Current Stock : {{currentStock}} </b>
+</div>
+
+<app-resupply (newStockValue)='updateStock($event)'></app-resupply>
